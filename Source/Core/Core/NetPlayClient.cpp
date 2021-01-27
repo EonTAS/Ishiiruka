@@ -1014,11 +1014,11 @@ void NetPlayClient::UpdateDevices()
     {
       while (SConfig::GetInstance().m_SIDevice[local_pad]->GetDeviceType() == SerialInterface::SIDEVICE_NONE && local_pad < 4) 
       {
-        local_pad++
+        local_pad++;
       }
       if(local_pad >= 4)
       {
-        SerialInterface::AddDevice(SerialInterface::SIDEVICE_NONE, pad
+        SerialInterface::AddDevice(SerialInterface::SIDEVICE_NONE, pad);
       }                      
       else if (SIDevice_IsGCController(SConfig::GetInstance().m_SIDevice[local_pad]))
       {
