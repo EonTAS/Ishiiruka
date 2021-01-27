@@ -1012,7 +1012,15 @@ void NetPlayClient::UpdateDevices()
     // exotic devices are not supported on netplay.
     if (player_id == local_player->pid)
     {
-      if (SIDevice_IsGCController(SConfig::GetInstance().m_SIDevice[local_pad]))
+      while (SConfig::GetInstance().m_SIDevice[local_pad]->GetDeviceType() == SerialInterface::SIDEVICE_NONE && local_pad < 4) 
+      {
+        local_pad++
+      }
+      if(local_pad >= 4)
+      {
+        SerialInterface::AddDevice(SerialInterface::SIDEVICE_NONE, pad
+      }                      
+      else if (SIDevice_IsGCController(SConfig::GetInstance().m_SIDevice[local_pad]))
       {
         SerialInterface::AddDevice(SConfig::GetInstance().m_SIDevice[local_pad], pad);
       }
