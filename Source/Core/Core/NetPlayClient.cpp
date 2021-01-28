@@ -1012,7 +1012,7 @@ void NetPlayClient::UpdateDevices()
     // exotic devices are not supported on netplay.
     if (player_id == local_player->pid)
     {
-      while (SConfig::GetInstance().m_SIDevice[local_pad]->GetDeviceType() == SerialInterface::SIDEVICE_NONE && local_pad < 4) 
+      while (SConfig::GetInstance().m_SIDevice[local_pad] == SerialInterface::SIDEVICE_NONE && local_pad < 4) 
       {
         local_pad++;
       }
@@ -1369,6 +1369,14 @@ int NetPlayClient::InGamePadToLocalPad(int ingame_pad)
     if (m_pad_map[pad] == local_player->pid)
       local_pad++;
   }
+  
+  pad = 0
+  for (; pad <= local_pad && local_pad < 4; pad++) 
+  {
+    if (SConfig::GetInstance().m_SIDdevice[pad] == SERIALInterface::SIDEVICE_NONE) 
+      local_pad++;
+    
+  }
 
   return local_pad;
 }
@@ -1380,11 +1388,16 @@ int NetPlayClient::LocalPadToInGamePad(int local_pad)
   // go in order.
   int local_pad_count = -1;
   int ingame_pad = 0;
+  int none_pads = 0
   for (; ingame_pad < 4; ingame_pad++)
   {
-    if (m_pad_map[ingame_pad] == local_player->pid)
+    if (m_pad_map[ingame_pad - none_pads] == local_player->pid)
       local_pad_count++;
-
+    
+    if (SConfig::GetInstance().m_SIDdevice[pad] == SERIALInterface::SIDEVICE_NONE) 
+      none_pads++; 
+      local_pad_count--;
+    
     if (local_pad_count == local_pad)
       break;
   }
