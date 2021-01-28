@@ -1388,7 +1388,7 @@ int NetPlayClient::LocalPadToInGamePad(int local_pad)
   // go in order.
   int local_pad_count = -1;
   int ingame_pad = 0;
-  int none_pads = 0
+  int none_pads = 0;
   for (; ingame_pad < 4; ingame_pad++)
   {
     if (m_pad_map[ingame_pad - none_pads] == local_player->pid)
