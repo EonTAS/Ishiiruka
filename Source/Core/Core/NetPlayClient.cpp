@@ -1402,7 +1402,7 @@ int NetPlayClient::LocalPadToInGamePad(int local_pad)
       break;
   }
 
-  return ingame_pad;
+  return ingame_pad - none_pads;
 }
 
 void NetPlayClient::SendTimeBase()
