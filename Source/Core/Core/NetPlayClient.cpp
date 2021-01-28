@@ -1395,9 +1395,10 @@ int NetPlayClient::LocalPadToInGamePad(int local_pad)
       local_pad_count++;
     
     if (SConfig::GetInstance().m_SIDdevice[pad] == SERIALInterface::SIDEVICE_NONE) 
+    {
       none_pads++; 
       local_pad_count--;
-    
+    }
     if (local_pad_count == local_pad)
       break;
   }
